@@ -37,7 +37,7 @@
     > 样例: `backcolor=0000ff`  
     > ![](https://unv-shield.librian.net/api/unv_shield?backcolor=0000ff)
 
-    设定背景颜色。  
+    设定背景颜色或指定两个颜色从上到下渐变。  
     默认的背景颜色会随图片改变，是自动生成的。  
 
 - `fontcolor`  

@@ -101,11 +101,23 @@ def 生(url: str = None, txt: str = '好!', size=32, border=3, barlen='auto', fo
 
     size, border, barlen, fontsize, barradius = [int(x*scale) for x in (size, border, barlen, fontsize, barradius)]
 
+    colors = []
     bb, b_color = 源(url, (size-2*border)*4)
     if backcolor == 'auto':
         backcolor = b_color
+    elif isinstance(backcolor, str):
+        colors = backcolor.split(',')
     else:
         backcolor = np.array(backcolor, dtype=float)
+
+    if len(colors) == 2:
+        color1 = list(color(colors[0]))
+        color2 = list(color(colors[1]))
+        backcolor = np.array(color2, dtype=float)
+    else:
+        h, l, s = colorsys.rgb_to_hls(*backcolor/255)
+        color1 = np.array(colorsys.hls_to_rgb(h, l+0.02, s))*255
+        color2 = np.array(colorsys.hls_to_rgb(h, l-0.06, s))*255
 
     if fontcolor == 'auto':
         if backcolor.mean() > 214:
@@ -113,9 +125,6 @@ def 生(url: str = None, txt: str = '好!', size=32, border=3, barlen='auto', fo
         else:
             fontcolor = (255, 255, 255)
 
-    h, l, s = colorsys.rgb_to_hls(*backcolor/255)
-    color1 = np.array(colorsys.hls_to_rgb(h, l+0.02, s))*255
-    color2 = np.array(colorsys.hls_to_rgb(h, l-0.06, s))*255
     s = 模板.render(
         size=size,
         border=border,
