@@ -105,7 +105,7 @@ def 生(url: str = None, txt: str = '好!', size=32, border=3, barlen='auto', fo
     bb, b_color = 源(url, (size-2*border)*4)
     if backcolor == 'auto':
         backcolor = b_color
-    elif isinstance(backcolor, str):
+    elif len(backcolor.split(',')) == 2:
         colors = backcolor.split(',')
     else:
         backcolor = np.array(backcolor, dtype=float)
